@@ -1,83 +1,48 @@
 import { Injectable } from '@angular/core';
 import { Survey } from './survey.model';
-
-const testSurveys: Survey[] = [
-  {
-    id: 1,
-    title: 'first test survey',
-    lastAction: new Date(86400000),
-    options: [
-      {
-        id: 1,
-        title: 'first option'
-      },
-      {
-        id: 2,
-        title: 'second option'
-      }
-    ]
-  },
-  {
-    id: 2,
-    title: 'second test survey',
-    lastAction: new Date(864000002),
-    options: [
-      {
-        id: 1,
-        title: 'third option'
-      },
-      {
-        id: 2,
-        title: 'fourth option'
-      }
-    ]
-  }
-
-];
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/do';
 
 @Injectable()
 export class SurveyService {
 
-  surveys: Survey[];
-  currentId = 100;
+  surveys: Survey[] = [];
   sortBy: SortBy = SortBy.Title;
+
+  constructor(private http: Http) { }
 
   getSurveys(): Promise<Survey[]> {
     return new Promise<Survey[]>((resolve, reject) => {
-      if (this.surveys) {
-        resolve(this.surveys);
-      } else {
-        this.fetchSurveys().then(() => {
+      if (this.surveys.length === 0) {
+        this.fetchSurveys().then((surveys) => {
+          this.surveys = surveys;
           resolve(this.surveys);
         }).catch(reject);
+      } else {
+        resolve(this.surveys);
       }
     });
   }
 
-  fetchSurveys(): Promise<void> {
-    return new Promise<void>((resolve, reject) => {
-      this.surveys = [];
-      testSurveys.forEach((survey) => {
-        this.surveys.push(Object.assign({}, survey));
-      });
-      resolve();
-    });
+  private fetchSurveys(): Promise<Survey[]> {
+    return this.http.get('surveys/all')
+      .map(res => res.json() as Survey[])
+      .toPromise();
   }
 
   createSurvey(): Promise<Survey> {
-    return this.fetchNewSurvey();
+    return this.fetchNewSurvey().then(survey => {
+      this.surveys.push(survey);
+      return survey;
+    });
   }
 
-  fetchNewSurvey(): Promise<Survey> {
-    return new Promise<Survey>((resolve, reject) => {
-      const survey: Survey = new Survey();
-      survey.id = this.obtainId();
-      survey.lastAction = new Date();
-      this.fetchSurveys().then(() => {
-        this.surveys.push(survey);
-        resolve(survey);
-      });
-    });
+  private fetchNewSurvey(): Promise<Survey> {
+    return this.http.get('surveys/new')
+      .map(res => res.json() as Survey)
+      .toPromise();
   }
 
   sortByTitle() {
@@ -99,10 +64,6 @@ export class SurveyService {
         return s2.lastAction.valueOf() - s1.lastAction.valueOf();
       }
     });
-  }
-
-  obtainId(): number {
-    return this.currentId++;
   }
 }
 

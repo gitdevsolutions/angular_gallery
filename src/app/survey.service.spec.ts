@@ -1,12 +1,15 @@
 import { TestBed, inject, async } from '@angular/core/testing';
 import { Survey } from './survey.model';
 import { SurveyService } from './survey.service';
+import { HttpTestbed, ConnectionMock } from '../http.testbed';
 
 describe('SurveyService', () => {
   beforeEach(() => {
-    TestBed.configureTestingModule({
+    HttpTestbed.configureTestingModule({
       providers: [SurveyService]
     });
+    HttpTestbed.setupConnectionMock('surveys/all', sampleSurveys());
+    HttpTestbed.setupConnectionMock('surveys/new', sampleNewSurvey());
   });
 
   it('should be created', inject([SurveyService], (service: SurveyService) => {
@@ -19,12 +22,6 @@ describe('SurveyService', () => {
     surveysPromise.then((surveys: Survey[]) => {
       expect(surveys).toBeTruthy();
     });
-  })));
-
-  it('obtains an id', async(inject([SurveyService], (service: SurveyService) => {
-    const id1: number = service.obtainId();
-    const id2: number = service.obtainId();
-    expect(id1).not.toEqual(id2);
   })));
 
   it('creates a survey', async(inject([SurveyService], (service: SurveyService) => {
@@ -52,3 +49,53 @@ describe('SurveyService', () => {
     });
   })));
 });
+
+function sampleSurveys() {
+  return [{
+    id: 1,
+    title: 'first test survey',
+    lastAction: new Date(86400000),
+    options: [
+      {
+        id: 1,
+        title: 'first option'
+      },
+      {
+        id: 2,
+        title: 'second option'
+      }
+    ]
+  }, {
+    id: 2,
+    title: 'second test survey',
+    lastAction: new Date(864000002),
+    options: [
+      {
+        id: 1,
+        title: 'third option'
+      },
+      {
+        id: 2,
+        title: 'fourth option'
+      }
+    ]
+  }];
+};
+
+function sampleNewSurvey(): Survey {
+  return {
+    id: 2,
+    title: 'new test survey',
+    lastAction: new Date(864000002),
+    options: [
+      {
+        id: 1,
+        title: 'first new option'
+      },
+      {
+        id: 2,
+        title: 'second new option'
+      }
+    ]
+  };
+}

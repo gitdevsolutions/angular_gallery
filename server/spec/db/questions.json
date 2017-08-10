@@ -1,0 +1,274 @@
+{
+    "questions": [
+        {
+            "id": 1,
+            "question": "## What is the meaning of keyword \"this\" in most object oriented languages?",
+            "type": "single",
+            "answers": [
+                {
+                    "id": 1,
+                    "answer": "a constant number",
+                    "wrong": true
+                },
+                {
+                    "id": 2,
+                    "answer": "a field",
+                    "wrong": true
+                },
+                {
+                    "id": 3,
+                    "answer": "a pointer to current object",
+                    "wrong": false
+                },
+                {
+                    "id": 4,
+                    "answer": "a compiler directive",
+                    "wrong": true
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "question": "## Given the following program:\n```javascript\nfunction getThis() {\n  return this;\n}\n\nconsole.log(getThis());```\n## What will be the console output when executed in a browser?",
+            "type": "single",
+            "answers": [
+                {
+                    "id": 1,
+                    "answer": "undefined",
+                    "wrong": true
+                },
+                {
+                    "id": 2,
+                    "answer": "Window",
+                    "wrong": false
+                },
+                {
+                    "id": 3,
+                    "answer": "null",
+                    "wrong": true
+                },
+                {
+                    "id": 4,
+                    "answer": "none of the above",
+                    "wrong": true
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "question": "## Given the following program:\n```javascript\n\"use strict\";\n\nfunction getThis() {\n  return this;\n}\n\nconsole.log(getThis());\n```\n## What will be the console output when executed in a browser?",
+            "type": "single",
+            "answers": [
+                {
+                    "id": 1,
+                    "answer": "undefined",
+                    "wrong": false
+                },
+                {
+                    "id": 2,
+                    "answer": "Window",
+                    "wrong": true
+                },
+                {
+                    "id": 3,
+                    "answer": "null",
+                    "wrong": true
+                },
+                {
+                    "id": 4,
+                    "answer": "none of the above",
+                    "wrong": true
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "question": "## Given the following program:\n```javascript\nfunction MyClass(fieldValue) {\n  this.field = fieldValue;\n  this.logField = function() {\n    console.log(this.field);\n  }  \n}\n\nlet object1 = new MyClass(\"value1\");\nlet object2 = new MyClass(\"value2\");\nobject2.logField.call(object1);\n```\n## What will be the console output when executed in a browser?",
+            "type": "single",
+            "answers": [
+                {
+                    "id": 1,
+                    "answer": "undefined",
+                    "wrong": true
+                },
+                {
+                    "id": 2,
+                    "answer": "value1",
+                    "wrong": false
+                },
+                {
+                    "id": 3,
+                    "answer": "value2",
+                    "wrong": true
+                },
+                {
+                    "id": 4,
+                    "answer": "object2",
+                    "wrong": true
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "question": "## What is the difference between call and apply?",
+            "type": "single",
+            "answers": [
+                {
+                    "id": 1,
+                    "answer": "there is no difference",
+                    "wrong": true
+                },
+                {
+                    "id": 2,
+                    "answer": "call takes date as first parameter",
+                    "wrong": true
+                },
+                {
+                    "id": 3,
+                    "answer": "apply takes array as second parameter",
+                    "wrong": false
+                },
+                {
+                    "id": 4,
+                    "answer": "call is static while apply is dynamic",
+                    "wrong": true
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "question": "## How does \"use strict\"; directive influence the value of \"this\"?",
+            "type": "single",
+            "answers": [
+                {
+                    "id": 1,
+                    "answer": "it does not influence \"this\"",
+                    "wrong": true
+                },
+                {
+                    "id": 2,
+                    "answer": "by default \"this\" is undefined",
+                    "wrong": false
+                },
+                {
+                    "id": 3,
+                    "answer": "by default \"this\" points to Window object",
+                    "wrong": true
+                },
+                {
+                    "id": 4,
+                    "answer": "none of the above",
+                    "wrong": true
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "question": "## What is a \"constructor\"?",
+            "type": "single",
+            "answers": [
+                {
+                    "id": 1,
+                    "answer": "it is a function that creates an object",
+                    "wrong": false
+                },
+                {
+                    "id": 2,
+                    "answer": "it is a cloaking device",
+                    "wrong": true
+                },
+                {
+                    "id": 3,
+                    "answer": "it is a role responsible for creation of an object",
+                    "wrong": false
+                },
+                {
+                    "id": 4,
+                    "answer": "all of the above",
+                    "wrong": true
+                }
+            ]
+        },
+        {
+            "id": 8,
+            "question": "## How to print the word Message on the console?",
+            "type": "single",
+            "answers": [
+                {
+                    "id": 1,
+                    "answer": "console(\"Message\");",
+                    "wrong": true
+                },
+                {
+                    "id": 2,
+                    "answer": "alert(\"Message\");",
+                    "wrong": true
+                },
+                {
+                    "id": 3,
+                    "answer": "print(\"Message\");",
+                    "wrong": true
+                },
+                {
+                    "id": 4,
+                    "answer": "console.log(\"Message\")",
+                    "wrong": false
+                }
+            ]
+        },
+        {
+            "id": 9,
+            "question": "## What is considered a bad practice?",
+            "type": "single",
+            "answers": [
+                {
+                    "id": 1,
+                    "answer": "using console",
+                    "wrong": true
+                },
+                {
+                    "id": 2,
+                    "answer": "using console in production code",
+                    "wrong": false
+                },
+                {
+                    "id": 3,
+                    "answer": "programming in JavaScript",
+                    "wrong": true
+                },
+                {
+                    "id": 4,
+                    "answer": "all of the above",
+                    "wrong": true
+                }
+            ]
+        },
+        {
+            "id": 10,
+            "question": "## What does \"new\" do?",
+            "type": "single",
+            "answers": [
+                {
+                    "id": 1,
+                    "answer": "creates new object",
+                    "wrong": true
+                },
+                {
+                    "id": 2,
+                    "answer": "invokes function",
+                    "wrong": true
+                },
+                {
+                    "id": 3,
+                    "answer": "bounds this to newly created object",
+                    "wrong": true
+                },
+                {
+                    "id": 4,
+                    "answer": "all of the above",
+                    "wrong": false
+                }
+            ]
+        }
+    ]
+}

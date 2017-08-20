@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-gallery-glosuj',
+  selector: 'gallery-glosuj',
   templateUrl: './gallery-glosuj.component.html',
   styleUrls: ['./gallery-glosuj.component.css']
 })
